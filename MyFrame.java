@@ -33,6 +33,16 @@ public class MyFrame extends JFrame implements ActionListener {
     JCheckBox checkBox_PC;
     JTextField textField1_PC;
     JTextField textField2_PC;
+    JLabel label_FC;
+    JPanel panel_FC;
+    JButton button_FC;
+    JTextField textField_FC;
+    JLabel label_DC;
+    JPanel panel_DC;
+    JLabel label_DS;
+    JPanel panel_DS;
+    JLabel label_GS;
+    JPanel panel_GS;
     JButton button1;
     JButton button2;
     JButton button3;
@@ -55,7 +65,7 @@ public class MyFrame extends JFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(new TitledBorder("ParkingLot System"));
         this.add(mainPanel);
-        // set button Panel
+        // set top button Panel
         buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.yellow);
         // buttonPanel.setBounds(0, 0, 1000, 100);
@@ -76,7 +86,6 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_CS.setBackground(Color.gray);
         panel_CS.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_CS);
-
         button_CS = new JButton("Create A Slot");
         button_CS.addActionListener(this);
         textField_CS = new JTextField();
@@ -99,7 +108,6 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_PC.setBackground(Color.gray);
         panel_PC.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_PC);
-
         button_PC = new JButton("Park Car");
         button_PC.addActionListener(this);
         textField1_PC = new JTextField();
@@ -115,6 +123,56 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_PC.add(textField2_PC);
         panel_PC.add(checkBox_PC);
         panel_PC.add(button_PC);
+        // Adding Fina Car panel and contents
+        label_FC = new JLabel();
+        label_FC.setText("Enter car registration (an uppercase letter followed by 4 digits)");
+        panel_FC = new JPanel();
+        panel_FC.setLayout(new BoxLayout(panel_FC, BoxLayout.Y_AXIS));
+        panel_FC.setBorder(new TitledBorder("Fina A Car"));
+        panel_FC.setVisible(false);
+        panel_FC.setBackground(Color.gray);
+        panel_FC.setBounds(0, 0, 100, 100);
+        contentsPanel.add(panel_FC);
+        button_FC = new JButton("Find Car");
+        button_FC.addActionListener(this);
+        textField_FC = new JTextField();
+        textField_FC.setPreferredSize(new Dimension(250, 40));
+        panel_FC.add(label_FC);
+        panel_FC.add(textField_FC);
+        panel_FC.add(button_FC);
+        // Adding Delete Car panel and contents
+        label_DC = new JLabel();
+        label_DC.setText("Enter car registration to remove (an uppercase letter followed by 4 digits)");
+        panel_DC = new JPanel();
+        panel_DC.setLayout(new BoxLayout(panel_DC, BoxLayout.Y_AXIS));
+        panel_DC.setBorder(new TitledBorder("Delete A Car"));
+        panel_DC.setVisible(false);
+        panel_DC.setBackground(Color.gray);
+        panel_DC.setBounds(0, 0, 100, 100);
+        contentsPanel.add(panel_DC);
+        panel_DC.add(label_DC);
+        // Adding Delete Slot panel and contents
+        label_DS = new JLabel();
+        label_DS.setText("Enter parking slot ID to delete (an uppercase letter followed by 2 digits)");
+        panel_DS = new JPanel();
+        panel_DS.setLayout(new BoxLayout(panel_DS, BoxLayout.Y_AXIS));
+        panel_DS.setBorder(new TitledBorder("Delete A Slot"));
+        panel_DS.setVisible(false);
+        panel_DS.setBackground(Color.gray);
+        panel_DS.setBounds(0, 0, 100, 100);
+        contentsPanel.add(panel_DS);
+        panel_DS.add(label_DS);
+        // Adding Show All slot panel and contents
+        label_GS = new JLabel();
+        label_GS.setText("Showing All Slots");
+        panel_GS = new JPanel();
+        panel_GS.setLayout(new BoxLayout(panel_GS, BoxLayout.Y_AXIS));
+        panel_GS.setBorder(new TitledBorder("Showing All Slots"));
+        panel_GS.setVisible(false);
+        panel_GS.setBackground(Color.gray);
+        panel_GS.setBounds(0, 0, 100, 100);
+        contentsPanel.add(panel_GS);
+        panel_GS.add(label_GS);
         // buttons for showing every function's contents
         button1 = new JButton();
         button1.setBounds(200, 200, 200, 100);
@@ -165,15 +223,63 @@ public class MyFrame extends JFrame implements ActionListener {
             // System.out.println(textField1_PC.getText());
             CarPark.ParkACar(arr, textField1_PC.getText(), textField2_PC.getText(), checkBox_CS.isSelected());
         }
+        if (e.getSource() == button_FC) {
+            // System.out.println(textField1_PC.getText());
+            CarPark.FindACar(arr, textField_FC.getText());
+        }
         if (e.getSource() == button1) {
             System.out.println("Show Create Slot contents");
             panel_CS.setVisible(true);
             panel_PC.setVisible(false);
+            panel_FC.setVisible(false);
+            panel_DC.setVisible(false);
+            panel_DS.setVisible(false);
+            panel_GS.setVisible(false);
         }
         if (e.getSource() == button2) {
             System.out.println("Show Park Car contents");
             panel_PC.setVisible(true);
             panel_CS.setVisible(false);
+            panel_FC.setVisible(false);
+            panel_DC.setVisible(false);
+            panel_DS.setVisible(false);
+            panel_GS.setVisible(false);
+        }
+        if (e.getSource() == button3) {
+            System.out.println("Show Fina Car contents");
+            panel_CS.setVisible(false);
+            panel_PC.setVisible(false);
+            panel_FC.setVisible(true);
+            panel_DC.setVisible(false);
+            panel_DS.setVisible(false);
+            panel_GS.setVisible(false);
+        }
+        if (e.getSource() == button4) {
+            System.out.println("Show Delete Car contents");
+            panel_PC.setVisible(false);
+            panel_CS.setVisible(false);
+            panel_FC.setVisible(false);
+            panel_DC.setVisible(true);
+            panel_DS.setVisible(false);
+            panel_GS.setVisible(false);
+        }
+        if (e.getSource() == button5) {
+            System.out.println("Show Delete Slot contents");
+            panel_CS.setVisible(false);
+            panel_PC.setVisible(false);
+            panel_FC.setVisible(false);
+            panel_DC.setVisible(false);
+            panel_DS.setVisible(true);
+            panel_GS.setVisible(false);
+        }
+        if (e.getSource() == button6) {
+            System.out.println("Show All Slot contents");
+            panel_CS.setVisible(false);
+            panel_PC.setVisible(false);
+            panel_FC.setVisible(false);
+            panel_DC.setVisible(false);
+            panel_DS.setVisible(false);
+            panel_GS.setVisible(true);
         }
     }
 }

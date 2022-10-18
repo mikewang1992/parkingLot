@@ -137,11 +137,11 @@ public class CarPark {
         }
     }
 
-    public static void FindACar(ArrayList<ParkingSlot> arr) {
+    public static void FindACar(ArrayList<ParkingSlot> arr, String registration) {
         System.out.println("Starting FindACar");
         System.out.println("Enter car registration (an uppercase letter followed by 4 digits)");
         Scanner rg = new Scanner(System.in);
-        String registration = rg.next();
+        // String registration = rg.next();
         if (registration.length() == 5) {
             // user input wrong format handle
             boolean foundSomething = false;
