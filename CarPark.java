@@ -52,12 +52,12 @@ public class CarPark {
         // }
     }
 
-    public static void ParkACar(ArrayList<ParkingSlot> arr) {
+    public static void ParkACar(ArrayList<ParkingSlot> arr, String parkingSlotID, String owner, boolean staffCar) {
         System.out.println("Starting parkACar");
 
         System.out.println("Enter parking slot ID (an uppercase letter followed by 2 digits) for this car to park");
         Scanner pid = new Scanner(System.in);
-        String parkingSlotID = pid.next();
+        // String parkingSlotID = pid.next();
         // user input wrong format handle
         if (parkingSlotID.length() == 3) {
             parkingSlotID = parkingSlotID.toUpperCase();
@@ -87,11 +87,11 @@ public class CarPark {
                             if (!foundCarExist) {
                                 System.out.println("Enter owner name");
                                 Scanner on = new Scanner(System.in);
-                                String owner = on.next();
+                                // String owner = on.next();
 
                                 System.out.println("Is the car a staff Car?(true/false)");
                                 Scanner sc = new Scanner(System.in);
-                                boolean staffCar = sc.nextBoolean();
+                                // boolean staffCar = sc.nextBoolean();
                                 // check if the slot and car are match in staff or visitor
                                 if (arr.get(i).getforStaff() == staffCar) {
                                     // 1.Advanced features: record the time that car parked
@@ -101,28 +101,39 @@ public class CarPark {
                                     Car carObj = new Car(registration, owner, staffCar, timeInstant);
                                     arr.get(i).setSlot(carObj);
                                     System.out.println("Sucessfully park this car");
+                                    JOptionPane.showMessageDialog(null, "Sucessfully park this car", "success", 1);
+
                                 } else {
                                     System.out.println(
                                             "fail to park this car, becasue the staff slot is for staffs/the visitor slot if for visitors");
+                                    JOptionPane.showMessageDialog(null,
+                                            "fail to park this car, becasue the staff slot is for staffs/the visitor slot if for visitors",
+                                            "Fail", 0);
                                 }
                             } else {
                                 System.out.println("The registration has already exist in our system.");
+                                JOptionPane.showMessageDialog(null, "The registration has already exist in our system.",
+                                        "Fail", 0);
                             }
                         } else {
                             System.out.println("The registration you entered is invalid.");
+                            JOptionPane.showMessageDialog(null, "The registration you entered is invalid.", "Fail", 0);
                         }
                     } else {
                         // slot is occupied
                         System.out.println("the slot is occupied");
+                        JOptionPane.showMessageDialog(null, "the slot is occupied", "Fail", 0);
                     }
                 }
             }
             // if no matech handle
             if (foundSomething == false) {
                 System.out.println("The parking slot ID does not exist in our system.");
+                JOptionPane.showMessageDialog(null, "The parking slot ID does not exist in our system.", "Fail", 0);
             }
         } else {
             System.out.println("The parking slot ID you entered is invalid.");
+            JOptionPane.showMessageDialog(null, "The parking slot ID you entered is invalid.", "Fail", 0);
         }
     }
 
