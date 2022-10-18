@@ -7,20 +7,23 @@
  * @date Created on 8 sepetember 2022
  */
 import java.util.*;
+
+import javax.swing.JOptionPane;
+
 import java.time.LocalDateTime;
 import java.time.Duration;
 
 public class CarPark {
-    public static void CreateSlot(ArrayList<ParkingSlot> arr) {
+    public static void CreateSlot(ArrayList<ParkingSlot> arr, String parkingID, boolean forStaff) {
         System.out.println("Starting CreateSlot");
 
         System.out.println("Enter parking slot ID to create (an uppercase letter followed by 2 digits)");
         Scanner sl = new Scanner(System.in);
-        String parkingID = sl.next();
+        // String parkingID = sl.next();
 
         System.out.println("Is the parking slot for staff?(true/false)");
         Scanner sf = new Scanner(System.in);
-        boolean forStaff = sf.nextBoolean();
+        // boolean forStaff = sf.nextBoolean();
 
         if (parkingID.length() == 3) {
             parkingID = parkingID.toUpperCase();
@@ -30,6 +33,7 @@ public class CarPark {
                     // check if the parkingID exist in the system
                     foundSomething = true;
                     System.out.println("the parking ID already exist in our system");
+                    JOptionPane.showMessageDialog(null, "The parking ID already exist in our system", "Fail", 0);
                 }
             }
             // if no match handle
@@ -37,9 +41,11 @@ public class CarPark {
                 ParkingSlot PSobj = new ParkingSlot(forStaff, parkingID, new Car("", "", false, LocalDateTime.now()));
                 arr.add(PSobj);
                 System.out.println("Sucessfully add a new slot");
+                JOptionPane.showMessageDialog(null, "Sucessfully add a new slot", "Sucess", 1);
             }
         } else {
             System.out.println("The parking slot ID you entered is invalid.");
+            JOptionPane.showMessageDialog(null, "The parking slot ID you entered is invalid", "Fail", 0);
         }
         // for (int i = 0; i < arr.size(); i++) {
         // System.out.println(arr.get(i).toString());
