@@ -53,6 +53,21 @@ public class Car {
         return parkTime;
     }
 
+    public String getFormatted_ParkTime() {
+        DateTimeFormatter formating = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatted_parkTime = this.getParkTime().format(formating);
+        return formatted_parkTime;
+    }
+
+    public String Duration_Formatted() {
+        Duration duration = Duration.between(parkTime, LocalDateTime.now());
+        String duration_formatted = String.format("%d:%02d:%02d",
+                duration.toHours(),
+                duration.toMinutesPart(),
+                duration.toSecondsPart());
+        return duration_formatted;
+    }
+
     public void setParkTime(LocalDateTime parkTime) {
         this.parkTime = parkTime;
     }

@@ -68,20 +68,18 @@ public class MyFrame extends JFrame implements ActionListener {
         this.setVisible(true);
         // set Main Panel
         mainPanel = new JPanel();
-        mainPanel.setBackground(Color.blue);
+        mainPanel.setBackground(Color.white);
         mainPanel.setBounds(0, 0, 1000, 1000);
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(new TitledBorder("ParkingLot System"));
         this.add(mainPanel);
         // set top button Panel
         buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.yellow);
-        // buttonPanel.setBounds(0, 0, 1000, 100);
+        buttonPanel.setBackground(new Color(0, 128, 255));
         mainPanel.add(buttonPanel, BorderLayout.NORTH);
         // set contents Panel
         contentsPanel = new JPanel();
-        contentsPanel.setBackground(Color.green);
-        // contentsPanel.setBounds(0, 0, 1000, 100);
+        contentsPanel.setBackground(Color.lightGray);
         mainPanel.add(contentsPanel, BorderLayout.CENTER);
         // Adding Create Slot panel and contents
         label_CS = new JLabel();
@@ -91,7 +89,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_CS.setBorder(new TitledBorder("Create Slot"));
         panel_CS.setVisible(false);
         panel_CS.add(label_CS);
-        panel_CS.setBackground(Color.gray);
+        panel_CS.setBackground(new Color(255, 128, 0));
         panel_CS.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_CS);
         button_CS = new JButton("Create A Slot");
@@ -115,7 +113,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_PC.setLayout(new BoxLayout(panel_PC, BoxLayout.Y_AXIS));
         panel_PC.setBorder(new TitledBorder("Park A Car"));
         panel_PC.setVisible(false);
-        panel_PC.setBackground(Color.gray);
+        panel_PC.setBackground(new Color(255, 128, 0));
         panel_PC.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_PC);
         button_PC = new JButton("Park Car");
@@ -144,7 +142,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_FC.setLayout(new BoxLayout(panel_FC, BoxLayout.Y_AXIS));
         panel_FC.setBorder(new TitledBorder("Fina A Car"));
         panel_FC.setVisible(false);
-        panel_FC.setBackground(Color.gray);
+        panel_FC.setBackground(new Color(255, 128, 0));
         panel_FC.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_FC);
         button_FC = new JButton("Find Car");
@@ -164,7 +162,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_DC.setLayout(new BoxLayout(panel_DC, BoxLayout.Y_AXIS));
         panel_DC.setBorder(new TitledBorder("Delete A Car"));
         panel_DC.setVisible(false);
-        panel_DC.setBackground(Color.gray);
+        panel_DC.setBackground(new Color(255, 128, 0));
         panel_DC.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_DC);
         button_DC = new JButton("Delete Car");
@@ -181,7 +179,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_DS.setLayout(new BoxLayout(panel_DS, BoxLayout.Y_AXIS));
         panel_DS.setBorder(new TitledBorder("Delete A Slot"));
         panel_DS.setVisible(false);
-        panel_DS.setBackground(Color.gray);
+        panel_DS.setBackground(new Color(255, 128, 0));
         panel_DS.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_DS);
         button_DS = new JButton("Delete Slot");
@@ -198,7 +196,7 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_GS.setLayout(new BoxLayout(panel_GS, BoxLayout.Y_AXIS));
         panel_GS.setBorder(new TitledBorder("Showing All Slots"));
         panel_GS.setVisible(false);
-        panel_GS.setBackground(Color.gray);
+        panel_GS.setBackground(new Color(255, 128, 0));
         panel_GS.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_GS);
         panel_GS.add(label_GS);
@@ -251,7 +249,7 @@ public class MyFrame extends JFrame implements ActionListener {
         if (e.getSource() == button_PC) {
             // System.out.println(textField1_PC.getText());
             CarPark.ParkACar(arr, textField1_PC.getText(), textField2_PC.getText(), textField3_PC.getText(),
-                    checkBox_CS.isSelected());
+                    checkBox_PC.isSelected());
         }
         if (e.getSource() == button_FC) {
             Object[] FindACar = CarPark.FindACar(arr, textField_FC.getText());
@@ -286,6 +284,8 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button1) {
             System.out.println("Show Create Slot contents");
+            textField_CS.setText("");
+            checkBox_CS.setSelected(false);
             panel_CS.setVisible(true);
             panel_PC.setVisible(false);
             panel_FC.setVisible(false);
@@ -295,6 +295,10 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button2) {
             System.out.println("Show Park Car contents");
+            textField1_PC.setText("");
+            textField2_PC.setText("");
+            textField3_PC.setText("");
+            checkBox_PC.setSelected(false);
             panel_PC.setVisible(true);
             panel_CS.setVisible(false);
             panel_FC.setVisible(false);
@@ -304,6 +308,10 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button3) {
             System.out.println("Show Fina Car contents");
+            textField_FC.setText("");
+            panel_FC_bottom.removeAll();
+            panel_FC.revalidate();
+            panel_FC.repaint();
             panel_CS.setVisible(false);
             panel_PC.setVisible(false);
             panel_FC.setVisible(true);
@@ -313,6 +321,7 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button4) {
             System.out.println("Show Delete Car contents");
+            textField_DC.setText("");
             panel_PC.setVisible(false);
             panel_CS.setVisible(false);
             panel_FC.setVisible(false);
@@ -322,6 +331,7 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button5) {
             System.out.println("Show Delete Slot contents");
+            textField_DS.setText("");
             panel_CS.setVisible(false);
             panel_PC.setVisible(false);
             panel_FC.setVisible(false);
@@ -336,6 +346,51 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_FC.setVisible(false);
             panel_DC.setVisible(false);
             panel_DS.setVisible(false);
+            panel_GS.setVisible(true);
+
+            panel_GS.removeAll();
+            if (arr.size() <= 0) {
+                label_GS.setText("Currently no Slot in the parking Slot system");
+                panel_GS.add(label_GS);
+            }
+            panel_GS.revalidate();
+            panel_GS.repaint();
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println(arr.get(i));
+                JLabel label_GS1 = new JLabel();
+                JLabel label_GS2 = new JLabel();
+                JLabel label_GS3 = new JLabel();
+                JLabel label_GS4 = new JLabel();
+                JLabel label_GS5 = new JLabel();
+                JPanel panel_GS_item = new JPanel();
+                // panel_GS_item.setLayout(new FlowLayout());
+                panel_GS_item.setLayout(new BoxLayout(panel_GS_item, BoxLayout.Y_AXIS));
+                if (arr.get(i).getSlot().getRegistration().length() > 0) {
+                    label_GS1.setText("Registration: " + arr.get(i).getSlot().getRegistration());
+                    label_GS2.setText("Own: " + arr.get(i).getSlot().getOwner());
+                    label_GS3.setText("Parking Time: " + arr.get(i).getSlot().getFormatted_ParkTime());
+                    label_GS4.setText("Staying Time: " + arr.get(i).getSlot().Duration_Formatted());
+                } else {
+                    label_GS1.setText("No Car is currently parking");
+                }
+                if (arr.get(i).getforStaff()) {
+                    // label_GS5.setText("staff parking");
+                    panel_GS_item.setBorder(new TitledBorder(arr.get(i).getparkingID() + " - staff parking"));
+                    panel_GS_item.setBackground(new Color(128, 0, 255));
+                } else {
+                    // label_GS5.setText("non staff parking");
+                    panel_GS_item.setBorder(new TitledBorder(arr.get(i).getparkingID() + " - non staff parking"));
+                    panel_GS_item.setBackground(new Color(0, 255, 64));
+                }
+                panel_GS_item.add(label_GS1);
+                panel_GS_item.add(label_GS2);
+                panel_GS_item.add(label_GS3);
+                panel_GS_item.add(label_GS4);
+                panel_GS_item.add(label_GS5);
+                panel_GS_item.setSize(500, 500);
+                panel_GS.add(panel_GS_item);
+            }
+            panel_GS.setVisible(false);
             panel_GS.setVisible(true);
         }
     }
