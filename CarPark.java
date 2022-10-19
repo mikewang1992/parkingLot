@@ -7,7 +7,7 @@
  * @date Created on 8 sepetember 2022
  */
 import java.util.*;
-
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 import java.time.LocalDateTime;
@@ -52,7 +52,8 @@ public class CarPark {
         // }
     }
 
-    public static void ParkACar(ArrayList<ParkingSlot> arr, String parkingSlotID, String owner, boolean staffCar) {
+    public static void ParkACar(ArrayList<ParkingSlot> arr, String parkingSlotID, String registration, String owner,
+            boolean staffCar) {
         System.out.println("Starting parkACar");
 
         System.out.println("Enter parking slot ID (an uppercase letter followed by 2 digits) for this car to park");
@@ -73,7 +74,7 @@ public class CarPark {
 
                         System.out.println("Enter car registration (an uppercase letter followed by 4 digits)");
                         Scanner rg = new Scanner(System.in);
-                        String registration = rg.next();
+                        // String registration = rg.next();
                         // checking if the input registration is valid
                         if (registration.length() == 5) {
                             registration = registration.toUpperCase();
@@ -137,10 +138,13 @@ public class CarPark {
         }
     }
 
-    public static void FindACar(ArrayList<ParkingSlot> arr, String registration) {
+    public static Object[] FindACar(ArrayList<ParkingSlot> arr, String registration) {
+        // frame.setVisible(false);
         System.out.println("Starting FindACar");
         System.out.println("Enter car registration (an uppercase letter followed by 4 digits)");
         Scanner rg = new Scanner(System.in);
+        String theSlot = null;
+        String duration_formatted = null;
         // String registration = rg.next();
         if (registration.length() == 5) {
             // user input wrong format handle
@@ -149,24 +153,38 @@ public class CarPark {
                 if (arr.get(i).getSlot().getRegistration().equals(registration)) {
                     LocalDateTime timeParked = arr.get(i).getSlot().getParkTime();
                     Duration duration = Duration.between(timeParked, LocalDateTime.now());
-                    String duration_formatted = String.format("%d:%02d:%02d",
+                    duration_formatted = String.format("%d:%02d:%02d",
                             duration.toHours(),
                             duration.toMinutesPart(),
                             duration.toSecondsPart());
                     System.out.println("Found the car " + registration + " ,the car is parking in the slot: "
                             + arr.get(i).getparkingID() + " parking time length: "
                             + duration_formatted);
+                    theSlot = arr.get(i).getparkingID();
                     foundSomething = true;
+                    JOptionPane.showMessageDialog(null,
+                            "Found the car " + registration + " ,the car is parking in the slot: "
+                                    + arr.get(i).getparkingID() + " parking time length: "
+                                    + duration_formatted,
+                            "success", 1);
                 }
             }
             // if no matech handle
             if (foundSomething == false) {
                 System.out.println("The registration does not exist in our system.");
+                JOptionPane.showMessageDialog(null,
+                        "The registration does not exist in our system.",
+                        "Fail", 0);
             }
         } else {
             // user input wrong format handle
             System.out.println("The car registration you entered is invalid.");
+            JOptionPane.showMessageDialog(null,
+                    "The car registration you entered is invalid.",
+                    "Fail", 0);
         }
+
+        return new Object[] { registration, theSlot, duration_formatted };
     }
 
     public static void DeleteACar(ArrayList<ParkingSlot> arr) {

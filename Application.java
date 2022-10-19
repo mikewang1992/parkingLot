@@ -15,9 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class Application extends JPanel {
-    JPanel panel = new JPanel();
-
+public class Application {
     public static void main(String[] args) {
         // ArrayList<ParkingSlot> arr = new ArrayList<ParkingSlot>();
         // System.out

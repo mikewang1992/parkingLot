@@ -28,15 +28,18 @@ public class MyFrame extends JFrame implements ActionListener {
     JTextField textField_CS;
     JLabel label1_PC;
     JLabel label2_PC;
+    JLabel label3_PC;
     JPanel panel_PC;
     JButton button_PC;
     JCheckBox checkBox_PC;
     JTextField textField1_PC;
     JTextField textField2_PC;
+    JTextField textField3_PC;
     JLabel label_FC;
     JPanel panel_FC;
     JButton button_FC;
     JTextField textField_FC;
+    // JLabel label_FC_out;
     JLabel label_DC;
     JPanel panel_DC;
     JLabel label_DS;
@@ -100,7 +103,9 @@ public class MyFrame extends JFrame implements ActionListener {
         label1_PC = new JLabel();
         label1_PC.setText("Enter parking slot ID (an uppercase letter followed by 2 digits) for this car to park");
         label2_PC = new JLabel();
-        label2_PC.setText("Enter owner name");
+        label2_PC.setText("Enter car registration (an uppercase letter followed by 4 digits)");
+        label3_PC = new JLabel();
+        label3_PC.setText("Enter owner name");
         panel_PC = new JPanel();
         panel_PC.setLayout(new BoxLayout(panel_PC, BoxLayout.Y_AXIS));
         panel_PC.setBorder(new TitledBorder("Park A Car"));
@@ -114,6 +119,8 @@ public class MyFrame extends JFrame implements ActionListener {
         textField1_PC.setPreferredSize(new Dimension(250, 40));
         textField2_PC = new JTextField();
         textField2_PC.setPreferredSize(new Dimension(250, 40));
+        textField3_PC = new JTextField();
+        textField3_PC.setPreferredSize(new Dimension(250, 40));
         checkBox_PC = new JCheckBox("Is the car a staff Car?");
         checkBox_PC.setBounds(100, 100, 50, 50);
         checkBox_PC.addActionListener(this);
@@ -121,6 +128,8 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_PC.add(textField1_PC);
         panel_PC.add(label2_PC);
         panel_PC.add(textField2_PC);
+        panel_PC.add(label3_PC);
+        panel_PC.add(textField3_PC);
         panel_PC.add(checkBox_PC);
         panel_PC.add(button_PC);
         // Adding Fina Car panel and contents
@@ -221,11 +230,26 @@ public class MyFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == button_PC) {
             // System.out.println(textField1_PC.getText());
-            CarPark.ParkACar(arr, textField1_PC.getText(), textField2_PC.getText(), checkBox_CS.isSelected());
+            CarPark.ParkACar(arr, textField1_PC.getText(), textField2_PC.getText(), textField3_PC.getText(),
+                    checkBox_CS.isSelected());
         }
         if (e.getSource() == button_FC) {
-            // System.out.println(textField1_PC.getText());
-            CarPark.FindACar(arr, textField_FC.getText());
+            Object[] FindACar = CarPark.FindACar(arr, textField_FC.getText());
+            System.out.println(FindACar[0]);
+            System.out.println(FindACar[1]);
+            System.out.println(FindACar[2]);
+            JLabel label_FC_out1 = new JLabel();
+            JLabel label_FC_out2 = new JLabel();
+            JLabel label_FC_out3 = new JLabel();
+            label_FC_out1.setText("Found the car registration: " + FindACar[0]);
+            label_FC_out2.setText("The car is parking in the slot: " + FindACar[1]);
+            label_FC_out3.setText("Parking time length: " + FindACar[2]);
+            panel_FC.add(label_FC_out1);
+            panel_FC.add(label_FC_out2);
+            panel_FC.add(label_FC_out3);
+            panel_FC.setVisible(false);
+            panel_FC.setVisible(true);
+            // CarPark.FindACar(arr, textField_FC.getText());
         }
         if (e.getSource() == button1) {
             System.out.println("Show Create Slot contents");
