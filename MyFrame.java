@@ -1,11 +1,16 @@
 
+/**
+ * Project2: MyFrame content every GUI layout and event listener
+ * 
+ * @author WANJYUN WANG <103801303>
+ * @version JDK 1.8.0_341
+ * @date Created on 20 October 2022
+ */
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.util.*;
 
 import javax.swing.BoxLayout;
@@ -40,7 +45,6 @@ public class MyFrame extends JFrame implements ActionListener {
     JPanel panel_FC_bottom;
     JButton button_FC;
     JTextField textField_FC;
-    // JLabel label_FC_out;
     JLabel label_DC;
     JPanel panel_DC;
     JButton button_DC;
@@ -57,19 +61,20 @@ public class MyFrame extends JFrame implements ActionListener {
     JButton button4;
     JButton button5;
     JButton button6;
+    // Main array for the parking lot system
     ArrayList<ParkingSlot> arr = new ArrayList<ParkingSlot>();
 
     MyFrame() {
         // set Main Frame
         this.setSize(1000, 1000);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(null);
         this.pack();
         this.setVisible(true);
         // set Main Panel
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);
         mainPanel.setBounds(0, 0, 1000, 1000);
+        mainPanel.setSize(1000, 1000);
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(new TitledBorder("ParkingLot System"));
         this.add(mainPanel);
@@ -239,18 +244,22 @@ public class MyFrame extends JFrame implements ActionListener {
         buttonPanel.add(button6);
     }
 
+    // even listener
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("yoyo actionPerformed");
+
+        // function trigger for CreateSlot
         if (e.getSource() == button_CS) {
-            // System.out.println(textField_CS.getText());
             CarPark.CreateSlot(arr, textField_CS.getText(), checkBox_CS.isSelected());
         }
+
+        // function trigger for ParkACar
         if (e.getSource() == button_PC) {
-            // System.out.println(textField1_PC.getText());
             CarPark.ParkACar(arr, textField1_PC.getText(), textField2_PC.getText(), textField3_PC.getText(),
                     checkBox_PC.isSelected());
         }
+
+        // function trigger for FindACar
         if (e.getSource() == button_FC) {
             Object[] FindACar = CarPark.FindACar(arr, textField_FC.getText());
             System.out.println(FindACar[0]);
@@ -272,16 +281,19 @@ public class MyFrame extends JFrame implements ActionListener {
                 panel_FC.setVisible(false);
                 panel_FC.setVisible(true);
             }
-            // CarPark.FindACar(arr, textField_FC.getText());
         }
+
+        // function trigger for DeleteACar
         if (e.getSource() == button_DC) {
-            // System.out.println(textField_CS.getText());
             CarPark.DeleteACar(arr, textField_DC.getText());
         }
+
+        // function trigger for DeleteSlot
         if (e.getSource() == button_DS) {
-            // System.out.println(textField_CS.getText());
             CarPark.DeleteSlot(arr, textField_DS.getText());
         }
+
+        // function trigger for Showing CreateSlot Content
         if (e.getSource() == button1) {
             System.out.println("Show Create Slot contents");
             textField_CS.setText("");
@@ -293,6 +305,8 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_DS.setVisible(false);
             panel_GS.setVisible(false);
         }
+
+        // function trigger for Showing ParkACar Content
         if (e.getSource() == button2) {
             System.out.println("Show Park Car contents");
             textField1_PC.setText("");
@@ -306,8 +320,10 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_DS.setVisible(false);
             panel_GS.setVisible(false);
         }
+
+        // function trigger for Showing FindACar Content
         if (e.getSource() == button3) {
-            System.out.println("Show Fina Car contents");
+            System.out.println("Show Find Car contents");
             textField_FC.setText("");
             panel_FC_bottom.removeAll();
             panel_FC.revalidate();
@@ -319,6 +335,8 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_DS.setVisible(false);
             panel_GS.setVisible(false);
         }
+
+        // function trigger for Showing DeleteACar Content
         if (e.getSource() == button4) {
             System.out.println("Show Delete Car contents");
             textField_DC.setText("");
@@ -329,6 +347,8 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_DS.setVisible(false);
             panel_GS.setVisible(false);
         }
+
+        // function trigger for Showing DeleteSlot Content
         if (e.getSource() == button5) {
             System.out.println("Show Delete Slot contents");
             textField_DS.setText("");
@@ -339,6 +359,8 @@ public class MyFrame extends JFrame implements ActionListener {
             panel_DS.setVisible(true);
             panel_GS.setVisible(false);
         }
+
+        // function trigger for GetAllSlots Content
         if (e.getSource() == button6) {
             System.out.println("Show All Slot contents");
             panel_CS.setVisible(false);

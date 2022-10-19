@@ -4,16 +4,16 @@
  * 
  * @author WANJYUN WANG <103801303>
  * @version JDK 1.8.0_341
- * @date Created on 8 sepetember 2022
+ * @date Created on 20 October 2022
  */
 import java.util.*;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 import java.time.LocalDateTime;
 import java.time.Duration;
 
 public class CarPark {
+    // CreateSlot method
     public static void CreateSlot(ArrayList<ParkingSlot> arr, String parkingID, boolean forStaff) {
         System.out.println("Starting CreateSlot");
 
@@ -52,6 +52,7 @@ public class CarPark {
         // }
     }
 
+    // ParkACar method
     public static void ParkACar(ArrayList<ParkingSlot> arr, String parkingSlotID, String registration, String owner,
             boolean staffCar) {
         System.out.println("Starting parkACar");
@@ -138,6 +139,7 @@ public class CarPark {
         }
     }
 
+    // FindACar method
     public static Object[] FindACar(ArrayList<ParkingSlot> arr, String registration) {
         // frame.setVisible(false);
         System.out.println("Starting FindACar");
@@ -187,6 +189,7 @@ public class CarPark {
         return new Object[] { registration, theSlot, duration_formatted };
     }
 
+    // DeleteACar method
     public static void DeleteACar(ArrayList<ParkingSlot> arr, String registration) {
         System.out.println("Starting DeleteACar");
         System.out.println("Enter car registration to remove (an uppercase letter followed by 4 digits)");
@@ -218,6 +221,7 @@ public class CarPark {
         }
     }
 
+    // DeleteSlot method
     public static void DeleteSlot(ArrayList<ParkingSlot> arr, String parkingSlotID) {
         System.out.println("Starting DeleteSlot");
         System.out.println("Enter parking slot ID to delete (an uppercase letter followed by 2 digits)");
@@ -258,6 +262,7 @@ public class CarPark {
         }
     }
 
+    // GetAllSlots method
     public static void GetAllSlots(ArrayList<ParkingSlot> arr) {
         System.out.println("Starting GetAllSlots");
         for (int i = 0; i < arr.size(); i++) {

@@ -4,7 +4,7 @@
  * 
  * @author WANJYUN WANG <103801303>
  * @version JDK 1.8.0_341
- * @date Created on 8 sepetember 2022
+ * @date Created on 20 October 2022
  */
 
 public class ParkingSlot {
