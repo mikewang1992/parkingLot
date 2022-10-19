@@ -187,11 +187,11 @@ public class CarPark {
         return new Object[] { registration, theSlot, duration_formatted };
     }
 
-    public static void DeleteACar(ArrayList<ParkingSlot> arr) {
+    public static void DeleteACar(ArrayList<ParkingSlot> arr, String registration) {
         System.out.println("Starting DeleteACar");
         System.out.println("Enter car registration to remove (an uppercase letter followed by 4 digits)");
         Scanner rg = new Scanner(System.in);
-        String registration = rg.next();
+        // String registration = rg.next();
         if (registration.length() == 5) {
             // user input wrong format handle
             boolean foundSomething = false;
@@ -200,23 +200,29 @@ public class CarPark {
                     System.out.println("Found the car " + registration + " the car is deleted.");
                     arr.get(i).setSlot(new Car("", "", false, LocalDateTime.now()));
                     foundSomething = true;
+                    JOptionPane.showMessageDialog(null, "Found the car " + registration + " the car is deleted.",
+                            "success", 1);
                 }
             }
             // if no matech handle
             if (foundSomething == false) {
                 System.out.println("The registration does not exist in our system.");
+                JOptionPane.showMessageDialog(null, "The registration does not exist in our system.",
+                        "Fail", 0);
             }
         } else {
             // user input wrong format handle
             System.out.println("The car registration you entered is invalid.");
+            JOptionPane.showMessageDialog(null, "The car registration you entered is invalid.",
+                    "Fail", 0);
         }
     }
 
-    public static void DeleteSlot(ArrayList<ParkingSlot> arr) {
+    public static void DeleteSlot(ArrayList<ParkingSlot> arr, String parkingSlotID) {
         System.out.println("Starting DeleteSlot");
         System.out.println("Enter parking slot ID to delete (an uppercase letter followed by 2 digits)");
         Scanner pid = new Scanner(System.in);
-        String parkingSlotID = pid.next();
+        // String parkingSlotID = pid.next();
         if (parkingSlotID.length() == 3) {
             // user input wrong format handle
             boolean foundSomething = false;
@@ -227,19 +233,28 @@ public class CarPark {
                         // delete only if slot if empty of car
                         arr.remove(i);
                         System.out.println("Found the parking slot " + parkingSlotID + " the slot is deleted.");
+                        JOptionPane.showMessageDialog(null,
+                                "Found the parking slot " + parkingSlotID + " the slot is deleted.",
+                                "success", 1);
                     } else {
                         System.out.println(
                                 "Delete fail, the parking slot " + parkingSlotID + " has a car currently parking in");
+                        JOptionPane.showMessageDialog(null,
+                                "Delete fail, the parking slot " + parkingSlotID + " has a car currently parking in",
+                                "Fail", 0);
                     }
                 }
             }
             // if no matech handle
             if (foundSomething == false) {
                 System.out.println("The parking slot ID does not exist in our system.");
+                JOptionPane.showMessageDialog(null, "The parking slot ID does not exist in our system.",
+                        "Fail", 0);
             }
         } else {
             // user input wrong format handle
             System.out.println("The parking slot ID you entered is invalid.");
+            JOptionPane.showMessageDialog(null, "The parking slot ID you entered is invalid.", "Fail", 0);
         }
     }
 

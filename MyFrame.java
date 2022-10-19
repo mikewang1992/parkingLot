@@ -37,13 +37,18 @@ public class MyFrame extends JFrame implements ActionListener {
     JTextField textField3_PC;
     JLabel label_FC;
     JPanel panel_FC;
+    JPanel panel_FC_bottom;
     JButton button_FC;
     JTextField textField_FC;
     // JLabel label_FC_out;
     JLabel label_DC;
     JPanel panel_DC;
+    JButton button_DC;
+    JTextField textField_DC;
     JLabel label_DS;
     JPanel panel_DS;
+    JButton button_DS;
+    JTextField textField_DS;
     JLabel label_GS;
     JPanel panel_GS;
     JButton button1;
@@ -149,6 +154,9 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_FC.add(label_FC);
         panel_FC.add(textField_FC);
         panel_FC.add(button_FC);
+        panel_FC_bottom = new JPanel();
+        panel_FC_bottom.setLayout(new BoxLayout(panel_FC_bottom, BoxLayout.Y_AXIS));
+        panel_FC.add(panel_FC_bottom);
         // Adding Delete Car panel and contents
         label_DC = new JLabel();
         label_DC.setText("Enter car registration to remove (an uppercase letter followed by 4 digits)");
@@ -159,7 +167,13 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_DC.setBackground(Color.gray);
         panel_DC.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_DC);
+        button_DC = new JButton("Delete Car");
+        button_DC.addActionListener(this);
+        textField_DC = new JTextField();
+        textField_DC.setPreferredSize(new Dimension(250, 40));
         panel_DC.add(label_DC);
+        panel_DC.add(textField_DC);
+        panel_DC.add(button_DC);
         // Adding Delete Slot panel and contents
         label_DS = new JLabel();
         label_DS.setText("Enter parking slot ID to delete (an uppercase letter followed by 2 digits)");
@@ -170,7 +184,13 @@ public class MyFrame extends JFrame implements ActionListener {
         panel_DS.setBackground(Color.gray);
         panel_DS.setBounds(0, 0, 100, 100);
         contentsPanel.add(panel_DS);
+        button_DS = new JButton("Delete Slot");
+        button_DS.addActionListener(this);
+        textField_DS = new JTextField();
+        textField_DS.setPreferredSize(new Dimension(250, 40));
         panel_DS.add(label_DS);
+        panel_DS.add(textField_DS);
+        panel_DS.add(button_DS);
         // Adding Show All slot panel and contents
         label_GS = new JLabel();
         label_GS.setText("Showing All Slots");
@@ -238,18 +258,31 @@ public class MyFrame extends JFrame implements ActionListener {
             System.out.println(FindACar[0]);
             System.out.println(FindACar[1]);
             System.out.println(FindACar[2]);
-            JLabel label_FC_out1 = new JLabel();
-            JLabel label_FC_out2 = new JLabel();
-            JLabel label_FC_out3 = new JLabel();
-            label_FC_out1.setText("Found the car registration: " + FindACar[0]);
-            label_FC_out2.setText("The car is parking in the slot: " + FindACar[1]);
-            label_FC_out3.setText("Parking time length: " + FindACar[2]);
-            panel_FC.add(label_FC_out1);
-            panel_FC.add(label_FC_out2);
-            panel_FC.add(label_FC_out3);
-            panel_FC.setVisible(false);
-            panel_FC.setVisible(true);
+            panel_FC_bottom.removeAll();
+            panel_FC.revalidate();
+            panel_FC.repaint();
+            if (!FindACar[1].equals(null)) {
+                JLabel label_FC_out1 = new JLabel();
+                JLabel label_FC_out2 = new JLabel();
+                JLabel label_FC_out3 = new JLabel();
+                label_FC_out1.setText("Found the car registration: " + FindACar[0]);
+                label_FC_out2.setText("The car is parking in the slot: " + FindACar[1]);
+                label_FC_out3.setText("Parking time length: " + FindACar[2]);
+                panel_FC_bottom.add(label_FC_out1);
+                panel_FC_bottom.add(label_FC_out2);
+                panel_FC_bottom.add(label_FC_out3);
+                panel_FC.setVisible(false);
+                panel_FC.setVisible(true);
+            }
             // CarPark.FindACar(arr, textField_FC.getText());
+        }
+        if (e.getSource() == button_DC) {
+            // System.out.println(textField_CS.getText());
+            CarPark.DeleteACar(arr, textField_DC.getText());
+        }
+        if (e.getSource() == button_DS) {
+            // System.out.println(textField_CS.getText());
+            CarPark.DeleteSlot(arr, textField_DS.getText());
         }
         if (e.getSource() == button1) {
             System.out.println("Show Create Slot contents");
